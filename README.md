@@ -2,7 +2,7 @@
 
 ## About
 
-**BlogNest** is a full-featured blogging platform that allows users to create, read, update, and delete blog posts. The platform is designed to be responsive and user-friendly, with a modern design and real-time updates.
+**BlogVerse** is a full-featured blogging platform that allows users to create, read, update, and delete blog posts. The platform is designed to be responsive and user-friendly, with a modern design and real-time updates.
 
 ## Features
 
