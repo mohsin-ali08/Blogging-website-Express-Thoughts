@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D-Blog</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    body {
+      background: #000 !important;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)),
+        url(./pages/images/landingbg.jpg) !important;
+    }
+    .hero-section {
+      background: #000 !important;
+      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+        url(./pages/images/landingbg.jpg) !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+    }
+    .blog-section {
+      background: #000 !important;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)),
+        url(./pages/images/blogimg.jpg) !important;
+
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+    }
+  </style>
+  <body>
+    <!-- Navbar -->
+    <nav
+      class="bg-white bg-opacity-20 border-gray-300 backdrop-filter backdrop-blur-lg rounded px-6 p-3 border-b"
+    >
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="#" class="text-xl font-bold text-white">BlogVerse</a>
+        <!-- Mobile Menu Button -->
+        <button
+          class="block md:hidden text-white focus:outline-none"
+          onclick="toggleMenu()"
+        >
+          <svg
+            class="h-7 w-7"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+        </button>
+        <!-- Links -->
+        <div class="hidden md:flex space-x-4">
+          <a href="#" class="text-white hover:text-blue-500">Home</a>
+          <a
+            href="./pages/Blogs/blogs.html"
+            class="text-white hover:text-blue-500"
+            >Blog</a
+          >
+          <a href="#" class="text-white hover:text-blue-500">Contact</a>
+          <a
+            href="./pages/auth/login/login.html"
+            id="LoginLink"
+            class="text-white hover:text-blue-500"
+            >Login</a
+          >
+          <a
+            href="./pages/auth/signup/signup.html"
+            id="SignupLink"
+            class="text-white hover:text-blue-500"
+            >Sign-up</a
+          >
+          <button
+            class="text-white hidden bg-blue-800 px-4 px-2 py-1 rounded hover:bg-red-700"
+            onclick="logout()"
+            id="logoutBtn"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden hidden text-center">
+        <a href="#" class="block text-white hover:text-blue-500 px-4 py-2"
+          >Home</a
+        >
+        <a
+          href="./pages/Blogs/blogs.html"
+          class="block text-white hover:text-blue-500 px-4 py-2"
+          >Blog</a
+        >
+        <a href="#" class="block text-white hover:text-blue-500 px-4 py-2"
+          >Contact</a
+        >
+        <a
+          href="./pages/auth/login/login.html"
+          id="LoginLinkMob"
+          class="block text-white hover:text-blue-500 px-4 py-2"
+          >Login</a
+        >
+        <a
+          href="./pages/auth/signup/signup.html"
+          id="SignupLinkMob"
+          class="block text-white hover:text-blue-500 px-4 py-2"
+          >Sign-up</a
+        >
+        <button
+          class="text-white hidden bg-red-500 px-2 py-1 rounded"
+          onclick="logout()"
+          id="logoutBtnMob"
+        >
+          Logout
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Hero Section -->
+    <section class="flex items-center justify-center min-h-screen hero-section">
+      <div class="text-center">
+        <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-8">
+          Your Daily-do Solutions Are Here
+        </h1>
+        <p class="text-lg md:text-2xl text-white font-medium mb-8">
+          Discover the best tips and tricks to boost your daily productivity.
+        </p>
+        <a
+          href="#blog-posts"
+          class="px-6 py-3 bg-white text-gray-900 font-bold rounded-full shadow-lg hover:bg-gray-200 transition duration-300"
+        >
+          Explore Now
+        </a>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog-posts" class="container mx-auto py-10 px-10 blog-section">
+      <h2 class="text-4xl font-bold text-center mb-12 text-white">
+        Latest Blog Posts
+      </h2>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2"
+        id="blogList"
+      >
+        <!-- Latest blogs will be inserted dynamically -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-white bg-opacity-20 border-gray-300 backdrop-filter backdrop-blur-lg rounded p-3 border-b"
+    >
+      <div
+        class="container mx-auto flex flex-col md:flex-row justify-between items-center"
+      >
+        <p class="text-gray-400 mb-4 md:mb-0">
+          © 2024 BlogVerse. All rights reserved.
+        </p>
+        <div
+          class="flex flex-col md:flex-row space-y-1 md:space-y-0 md:space-x-4"
+        >
+          <a href="https://www.linkedin.com/in/mohsin-ali08/">
+            <p class="text-gray-400">
+              Developed by <span class="text-white">_MOHSIN</span>
+            </p></a
+          >
+          <p class="text-gray-400 ml-2">Karachi, Pakistan</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

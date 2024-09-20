@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    body {
+      background: #000 !important;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),
+        url(../../images/landingbg.jpg) !important;
+
+      /* background-image: url(images/backgroundimg.jpg); */
+      background-size: cover !important;
+      background-position: center !important; /* Center the image */
+      background-repeat: no-repeat !important;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px) !important;
+      height: 100vh;
+    }
+  </style>
+  <body>
+    <!-- Navbar -->
+    <nav
+      class="bg-white bg-opacity-20 border-gray-300 backdrop-filter backdrop-blur-lg rounded px-6 p-3 border-b"
+    >
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="#" class="text-xl font-bold text-white">BlogVerse</a>
+        <!-- Mobile Menu Button -->
+        <button
+          class="block md:hidden text-white focus:outline-none"
+          onclick="toggleMenu()"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+        </button>
+        <!-- Links -->
+        <div class="hidden md:flex space-x-4">
+          <a href="../../../index.html" class="text-gray-300 hover:text-white"
+            >Home</a
+          >
+          <a
+            href="../../Blogs/BlogPage/page.html"
+            class="text-gray-300 hover:text-white"
+            >Blog</a
+          >
+          <a href="#" class="text-gray-300 hover:text-white">Contact</a>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div
+        id="mobile-menu"
+        class="md:hidden hidden text-center text-white transition-all duration-300 ease-in-out"
+      >
+        <a
+          href="../../../index.html"
+          class="block text-gray-300 hover:text-white px-4 py-2"
+          >Home</a
+        >
+        <a
+          href="../Blogs/blogs.html"
+          class="block text-gray-300 hover:text-white px-4 py-2"
+          >Blog</a
+        >
+        <a
+          href="#"
+          class="block border-b text-gray-300 hover:text-white px-4 py-2"
+          >Contact</a
+        >
+      </div>
+    </nav>
+    <!-- siginUp form  -->
+    <section class="px-4">
+      <div
+        class="mx-auto my-5 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border px-6 py-10 rounded-lg max-w-md w-full"
+      >
+        <h2 class="text-3xl font-bold mb-6 text-center text-white">Sign up</h2>
+        <div class="mb-4">
+          <label for="username" class="block text-gray-300 font-semibold mb-2"
+            >Username</label
+          >
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Enter Username"
+            class="w-full px-4 py-2 border rounded-md focus:outline-none"
+          />
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-gray-300 font-semibold mb-2"
+            >Email</label
+          >
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter Email"
+            class="w-full px-4 py-2 border rounded-md focus:outline-none"
+          />
+        </div>
+        <div class="mb-6">
+          <label for="password" class="block text-gray-300 font-semibold mb-2"
+            >Password</label
+          >
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter Password"
+            class="w-full px-4 py-2 border rounded-md focus:outline-none"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition-colors"
+          onclick="signup()"
+        >
+          Signup
+        </button>
+        <div class="flex justify-center items-center h-full pt-4">
+          <p class="text-gray-300 text-sm">
+            Already have an account?
+            <a
+              href="../login/login.html"
+              class="text-blue-500 cursor-pointer hover:underline text-sm font-semibold"
+              >Log In</a
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script src="./signup.js" type="module"></script>
+  </body>
+</html>
