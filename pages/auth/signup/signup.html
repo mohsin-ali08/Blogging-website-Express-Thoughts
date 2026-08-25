@@ -12,22 +12,19 @@
   <style>
     body {
       background: #000 !important;
-      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)),
+      background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.45)),
         url(../../images/landingbg.jpg) !important;
-
-      /* background-image: url(images/backgroundimg.jpg); */
       background-size: cover !important;
-      background-position: center !important; /* Center the image */
+      background-position: center !important;
       background-repeat: no-repeat !important;
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px) !important;
-      height: 100vh;
+      background-attachment: fixed !important;
+      min-height: 100vh;
     }
   </style>
   <body>
     <!-- Navbar -->
     <nav
-      class="bg-white bg-opacity-20 border-gray-300 backdrop-filter backdrop-blur-lg rounded px-6 p-3 border-b"
+      class="sticky top-0 z-50 bg-white/10 backdrop-blur-xl border-b border-white/20 px-6 py-3"
     >
       <div class="container mx-auto flex justify-between items-center">
         <a href="#" class="text-xl font-bold text-white">BlogVerse</a>
@@ -52,13 +49,11 @@
           </svg>
         </button>
         <!-- Links -->
-        <div class="hidden md:flex space-x-4">
+        <div class="hidden md:flex space-x-5">
           <a href="../../../index.html" class="text-gray-300 hover:text-white"
             >Home</a
           >
-          <a
-            href="../../Blogs/BlogPage/page.html"
-            class="text-gray-300 hover:text-white"
+          <a href="../../Blogs/blogs.html" class="text-gray-300 hover:text-white"
             >Blog</a
           >
           <a href="#" class="text-gray-300 hover:text-white">Contact</a>
@@ -67,7 +62,7 @@
       <!-- Mobile Menu -->
       <div
         id="mobile-menu"
-        class="md:hidden hidden text-center text-white transition-all duration-300 ease-in-out"
+        class="md:hidden hidden text-center text-white bg-white/10 backdrop-blur-xl border-b border-white/20 transition-all duration-300 ease-in-out"
       >
         <a
           href="../../../index.html"
@@ -75,7 +70,7 @@
           >Home</a
         >
         <a
-          href="../Blogs/blogs.html"
+          href="../../Blogs/blogs.html"
           class="block text-gray-300 hover:text-white px-4 py-2"
           >Blog</a
         >
@@ -86,13 +81,14 @@
         >
       </div>
     </nav>
-    <!-- siginUp form  -->
-    <section class="px-4">
+
+    <!-- SignUp form -->
+    <section class="flex items-center justify-center px-4 py-16">
       <div
-        class="mx-auto my-5 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border px-6 py-10 rounded-lg max-w-md w-full"
+        class="w-full max-w-md bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-8"
       >
-        <h2 class="text-3xl font-bold mb-6 text-center text-white">Sign up</h2>
-        <div class="mb-4">
+        <h2 class="text-3xl font-bold mb-8 text-center text-white">Create Account</h2>
+        <div class="mb-5">
           <label for="username" class="block text-gray-300 font-semibold mb-2"
             >Username</label
           >
@@ -101,10 +97,10 @@
             name="username"
             id="username"
             placeholder="Enter Username"
-            class="w-full px-4 py-2 border rounded-md focus:outline-none"
+            class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
           />
         </div>
-        <div class="mb-4">
+        <div class="mb-5">
           <label for="email" class="block text-gray-300 font-semibold mb-2"
             >Email</label
           >
@@ -112,11 +108,11 @@
             type="email"
             name="email"
             id="email"
-            placeholder="Enter Email"
-            class="w-full px-4 py-2 border rounded-md focus:outline-none"
+            placeholder="you@example.com"
+            class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
           />
         </div>
-        <div class="mb-6">
+        <div class="mb-7">
           <label for="password" class="block text-gray-300 font-semibold mb-2"
             >Password</label
           >
@@ -124,27 +120,28 @@
             type="password"
             name="password"
             id="password"
-            placeholder="Enter Password"
-            class="w-full px-4 py-2 border rounded-md focus:outline-none"
+            placeholder="••••••••"
+            class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent"
           />
         </div>
         <button
-          type="submit"
-          class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transition-colors"
+          type="button"
+          class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:from-indigo-500 hover:to-purple-500 focus:outline-none transition duration-300 flex items-center justify-center"
           onclick="signup()"
+          id="signupBtn"
         >
-          Signup
+          <span id="signupText">Sign Up</span>
+          <svg id="signupSpinner" class="hidden w-5 h-5 ml-2 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.964 7.964 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
         </button>
-        <div class="flex justify-center items-center h-full pt-4">
-          <p class="text-gray-300 text-sm">
-            Already have an account?
-            <a
-              href="../login/login.html"
-              class="text-blue-500 cursor-pointer hover:underline text-sm font-semibold"
-              >Log In</a
-            >
-          </p>
-        </div>
+        <p class="text-gray-300 mt-6 text-center">
+          Already have an account?
+          <a href="../login/login.html" class="text-indigo-300 hover:underline"
+            >Log In</a
+          >
+        </p>
       </div>
     </section>
 

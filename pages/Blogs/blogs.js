@@ -24,44 +24,58 @@ let allBlogs = []
 
 // Function to get all blogs from db
 const getBlogs = async () => {
-    const reference = collection(db, "blogs");
-    const dt = await getDocs(reference);
+    try {
+        const reference = collection(db, "blogs");
+        const dt = await getDocs(reference);
 
-    dt.forEach(item => {
-        let obj = {
-            id: item.id,
-            ...item.data(),
-        }
-        // Filter blogs by the logged-in user
-        if (user && obj.userName === user.username) {
-            allBlogs.push(obj);
-        }
-    })
+        dt.forEach(item => {
+            let obj = {
+                id: item.id,
+                ...item.data(),
+            }
+            // Filter blogs by the logged-in user
+            if (user && obj.userName === user.username) {
+                allBlogs.push(obj);
+            }
+        })
 
-    console.log(allBlogs);
-    renderBlogs()
-
+        console.log(allBlogs);
+        renderBlogs()
+    } catch (err) {
+        let loader = document.getElementById("blogLoader");
+        if (loader) loader.classList.add("hidden");
+        let blogList = document.getElementById("blogList");
+        if (blogList) blogList.innerHTML = `<p class="col-span-full text-center text-red-300 text-lg">Could not load blogs. Check Firebase rules.</p>`;
+        console.error(err);
+    }
 }
 getBlogs()
 
 // Function to render the blogs on HTML document
 const renderBlogs = () => {
     let blogList = document.getElementById("blogList");
+    let loader = document.getElementById("blogLoader");
+    if (loader) loader.classList.add("hidden");
     blogList.innerHTML = ''; // Clear the list before rendering
+
+    if (allBlogs.length === 0) {
+        blogList.innerHTML = `<p class="col-span-full text-center text-gray-300 text-lg">You haven't written any blogs yet.</p>`;
+        return;
+    }
 
     allBlogs.forEach(obj => {
         blogList.innerHTML += `
-          <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-md rounded-lg shadow-lg flex flex-col md:flex-row items-center p-5 mb-6 hover:shadow-2xl transition transform hover:scale-105" onclick="getId('${obj.id}')">
-                <!-- Blog Content -->
-                <div class="md:w-2/3 w-full md:pr-6">
-                    <h2 class="text-3xl border-b pb-2 font-bold text-white">${obj.title}</h2>
-                    <p class="text-gray-200 border-t">${obj.content.substring(0, 150)} <a href="./BlogPage/page.html" class="text-indigo-300 hover:text-indigo-500 font-semibold">...see more</a></p>
-                    <p class="text-gray-300 py-2 border-t">by <span class="font-semibold font-sm">${obj.userName}</span> on <span class="font-semibold">${obj.date}</span></p>
-                    <p class=" text-gray-300 pb-2">Category : <span class="text-white font-semibold font-sm"> ${obj.category}</span></p>
-                </div>
+          <div class="group bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row items-stretch hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer" onclick="getId('${obj.id}')">
                 <!-- Blog Image -->
-                <div class="md:w-1/3 w-full md:mt-0 py-3">
-                    <img src="${obj.image}" alt="Blog Image" class="rounded-lg object-cover w-full h-full">
+                <div class="md:w-1/3 w-full overflow-hidden">
+                    <img src="${obj.image || 'https://placehold.co/600x400/1e1b4b/a5b4fc?text=BlogVerse'}" alt="Blog Image" class="h-48 md:h-full w-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <!-- Blog Content -->
+                <div class="md:w-2/3 w-full p-6 flex flex-col justify-center">
+                    <span class="text-xs text-indigo-300 font-semibold mb-2">${obj.category || 'General'}</span>
+                    <h2 class="text-2xl border-b border-white/10 pb-2 font-bold text-white">${obj.title}</h2>
+                    <p class="text-gray-300 mt-3 line-clamp-3">${obj.content.substring(0, 150)} <a href="./BlogPage/page.html" onclick="event.stopPropagation(); getId('${obj.id}')" class="text-indigo-300 hover:text-indigo-500 font-semibold">...see more</a></p>
+                    <p class="text-gray-400 text-sm mt-3">by <span class="font-semibold text-white">${obj.userName}</span> on <span class="font-semibold">${obj.date}</span></p>
                 </div>
             </div>`
            

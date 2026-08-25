@@ -43,6 +43,11 @@ window.signup = () => {
 
   console.log(obj);
 
+  const btn = document.getElementById("signupBtn");
+  const txt = document.getElementById("signupText");
+  const spin = document.getElementById("signupSpinner");
+  if (btn) { btn.disabled = true; txt.textContent = "Creating..."; spin.classList.remove("hidden"); }
+
   createUserWithEmailAndPassword(auth, obj.email, obj.password)
   .then((res) => {
     obj.id = res.user.uid;
@@ -57,9 +62,12 @@ window.signup = () => {
     })
     .catch((e)=>{
       console.log(e.message);
+      alert(e.message);
+      if (btn) { btn.disabled = false; txt.textContent = "Sign Up"; spin.classList.add("hidden"); }
     })
   })
   .catch((e) => {
     alert(e.message);
+    if (btn) { btn.disabled = false; txt.textContent = "Sign Up"; spin.classList.add("hidden"); }
   });
 }
