@@ -3,193 +3,100 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>D-Blog</title>
+    <title>BlogVerse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com" />
     <style>
-    body {
-      background: #000 !important;
-      background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)),
-        url(./pages/images/landingbg.jpg) !important;
-      background-attachment: fixed !important;
-    }
-    .hero-section {
-      background: #000 !important;
-      background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)),
-        url(./pages/images/landingbg.jpg) !important;
-      background-size: cover !important;
-      background-position: center !important;
-      background-repeat: no-repeat !important;
-      background-attachment: fixed !important;
-    }
-    .blog-section {
-      background: #000 !important;
-      background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)),
-        url(./pages/images/blogimg.jpg) !important;
-
-      background-size: cover !important;
-      background-position: center !important;
-      background-repeat: no-repeat !important;
-      background-attachment: fixed !important;
-    }
-    .line-clamp-2 {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
+      body { font-family: 'Inter', sans-serif; }
     </style>
   </head>
-  <body>
+  <body class="text-white relative min-h-screen">
+    <!-- Background layer -->
+    <div
+      class="fixed inset-0 -z-10 bg-[url('./pages/images/landingbg.jpg')] bg-cover bg-center bg-fixed"
+    ></div>
+    <div class="fixed inset-0 -z-10 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
+
     <!-- Navbar -->
     <nav
       class="sticky top-0 z-50 bg-white/10 backdrop-blur-xl border-b border-white/20 px-6 py-3"
     >
       <div class="container mx-auto flex justify-between items-center">
-        <a href="#" class="text-xl font-bold text-white">BlogVerse</a>
-        <!-- Mobile Menu Button -->
+        <a href="#" class="text-2xl font-extrabold tracking-tight text-white"
+          >Blog<span class="text-indigo-400">Verse</span></a
+        >
         <button
           class="block md:hidden text-white focus:outline-none"
           onclick="toggleMenu()"
         >
-          <svg
-            class="h-7 w-7"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            ></path>
+          <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
-        <!-- Links -->
-        <div class="hidden md:flex space-x-4">
-          <a href="#" class="text-white hover:text-blue-500">Home</a>
-          <a
-            href="./pages/Blogs/blogs.html"
-            class="text-white hover:text-blue-500"
-            >Blog</a
-          >
-          <a href="#" class="text-white hover:text-blue-500">Contact</a>
-          <a
-            href="./pages/auth/login/login.html"
-            id="LoginLink"
-            class="text-white hover:text-blue-500"
-            >Login</a
-          >
-          <a
-            href="./pages/auth/signup/signup.html"
-            id="SignupLink"
-            class="text-white hover:text-blue-500"
-            >Sign-up</a
-          >
-          <button
-            class="text-white hidden bg-blue-800 px-4 px-2 py-1 rounded hover:bg-red-700"
-            onclick="logout()"
-            id="logoutBtn"
-          >
-            Logout
-          </button>
+        <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <a href="#" class="text-white hover:text-indigo-300 transition">Home</a>
+          <a href="./pages/Blogs/blogs.html" class="text-white hover:text-indigo-300 transition">Blog</a>
+          <a href="#" class="text-white hover:text-indigo-300 transition">Contact</a>
+          <a href="./pages/auth/login/login.html" id="LoginLink" class="text-white hover:text-indigo-300 transition">Login</a>
+          <a href="./pages/auth/signup/signup.html" id="SignupLink" class="text-white hover:text-indigo-300 transition">Sign-up</a>
+          <button onclick="logout()" id="logoutBtn" class="hidden bg-gradient-to-r from-indigo-500 to-purple-600 px-4 py-2 rounded-lg font-semibold hover:opacity-90 transition">Logout</button>
         </div>
       </div>
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="md:hidden hidden text-center bg-white/10 backdrop-blur-xl border-b border-white/20">
-        <a href="#" class="block text-white hover:text-blue-500 px-4 py-2"
-          >Home</a
-        >
-        <a
-          href="./pages/Blogs/blogs.html"
-          class="block text-white hover:text-blue-500 px-4 py-2"
-          >Blog</a
-        >
-        <a href="#" class="block text-white hover:text-blue-500 px-4 py-2"
-          >Contact</a
-        >
-        <a
-          href="./pages/auth/login/login.html"
-          id="LoginLinkMob"
-          class="block text-white hover:text-blue-500 px-4 py-2"
-          >Login</a
-        >
-        <a
-          href="./pages/auth/signup/signup.html"
-          id="SignupLinkMob"
-          class="block text-white hover:text-blue-500 px-4 py-2"
-          >Sign-up</a
-        >
-        <button
-          class="text-white hidden bg-red-500 px-2 py-1 rounded"
-          onclick="logout()"
-          id="logoutBtnMob"
-        >
-          Logout
-        </button>
+      <div id="mobile-menu" class="md:hidden hidden text-center bg-white/10 backdrop-blur-xl border-b border-white/20 mt-3 py-2">
+        <a href="#" class="block text-white hover:text-indigo-300 px-4 py-2">Home</a>
+        <a href="./pages/Blogs/blogs.html" class="block text-white hover:text-indigo-300 px-4 py-2">Blog</a>
+        <a href="#" class="block text-white hover:text-indigo-300 px-4 py-2">Contact</a>
+        <a href="./pages/auth/login/login.html" id="LoginLinkMob" class="block text-white hover:text-indigo-300 px-4 py-2">Login</a>
+        <a href="./pages/auth/signup/signup.html" id="SignupLinkMob" class="block text-white hover:text-indigo-300 px-4 py-2">Sign-up</a>
+        <button onclick="logout()" id="logoutBtnMob" class="hidden mx-auto mt-2 bg-gradient-to-r from-indigo-500 to-purple-600 px-4 py-2 rounded-lg font-semibold">Logout</button>
       </div>
     </nav>
 
-    <!-- Main Hero Section -->
-    <section class="flex items-center justify-center min-h-screen hero-section">
-      <div class="text-center">
-        <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-8">
-          Your Daily-do Solutions Are Here
+    <!-- Hero -->
+    <section class="flex items-center justify-center min-h-[90vh] px-6">
+      <div class="text-center max-w-3xl">
+        <span class="inline-block mb-5 px-4 py-1 rounded-full bg-white/10 backdrop-blur border border-white/20 text-sm font-medium text-indigo-200">✨ Your daily-dose of ideas</span>
+        <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+          Welcome to <span class="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">BlogVerse</span>
         </h1>
-        <p class="text-lg md:text-2xl text-white font-medium mb-8">
-          Discover the best tips and tricks to boost your daily productivity.
+        <p class="text-lg md:text-2xl text-gray-200 font-light mb-10">
+          Discover the best tips, stories and thoughts to boost your everyday productivity.
         </p>
         <a
           href="#blog-posts"
-          class="px-6 py-3 bg-white text-gray-900 font-bold rounded-full shadow-lg hover:bg-gray-200 transition duration-300"
+          class="inline-block px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 font-semibold rounded-full shadow-lg hover:scale-105 hover:shadow-indigo-500/40 transition-all duration-300"
         >
           Explore Now
         </a>
       </div>
     </section>
 
-    <!-- Blog Section -->
-    <section id="blog-posts" class="container mx-auto py-10 px-10 blog-section">
-      <h2 class="text-4xl font-bold text-center mb-12 text-white">
-        Latest Blog Posts
-      </h2>
+    <!-- Blogs -->
+    <section id="blog-posts" class="container mx-auto py-16 px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-3">Latest Blog Posts</h2>
+        <p class="text-gray-300">Fresh thoughts from our community</p>
+      </div>
       <div id="blogLoader" class="flex justify-center items-center py-20">
         <svg class="w-12 h-12 animate-spin text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.964 7.964 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
       </div>
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2"
-        id="blogList"
-      >
-        <!-- Latest blogs will be inserted dynamically -->
-      </div>
+      <div id="blogList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </section>
 
     <!-- Footer -->
-    <footer
-      class="bg-white bg-opacity-20 border-gray-300 backdrop-filter backdrop-blur-lg rounded p-3 border-b"
-    >
-      <div
-        class="container mx-auto flex flex-col md:flex-row justify-between items-center"
-      >
-        <p class="text-gray-400 mb-4 md:mb-0">
-          © 2024 BlogVerse. All rights reserved.
-        </p>
-        <div
-          class="flex flex-col md:flex-row space-y-1 md:space-y-0 md:space-x-4"
-        >
-          <a href="https://www.linkedin.com/in/mohsin-ali08/">
-            <p class="text-gray-400">
-              Developed by <span class="text-white">_MOHSIN</span>
-            </p></a
-          >
-          <p class="text-gray-400 ml-2">Karachi, Pakistan</p>
+    <footer class="bg-white/10 backdrop-blur-xl border-t border-white/20 mt-10">
+      <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-6 py-6 text-sm text-gray-300">
+        <p>© 2024 BlogVerse. All rights reserved.</p>
+        <div class="flex items-center space-x-4 mt-3 md:mt-0">
+          <a href="https://www.linkedin.com/in/mohsin-ali08/" class="hover:text-white transition">Developed by <span class="text-white font-semibold">_MOHSIN</span></a>
+          <span>Karachi, Pakistan</span>
         </div>
       </div>
     </footer>
