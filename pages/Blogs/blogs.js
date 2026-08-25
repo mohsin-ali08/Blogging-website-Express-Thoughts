@@ -6,8 +6,6 @@ import {
      collection,
      addDoc,
      getDocs,
-     storage, ref, uploadBytesResumable, 
-     getDownloadURL,
     } from "../../utils/firebase.js";
 
 
@@ -18,7 +16,7 @@ import {
 let title = document.getElementById('title')
 let category = document.getElementById('category')
 let content = document.getElementById('content')
-let file_upload = document.getElementById("file_upload")
+let image = document.getElementById('image')
 let user = JSON.parse(localStorage.getItem('user'))
 
 const date = new Date()
@@ -78,7 +76,7 @@ window.getId = (id) => {
 }
 
 // Function to handle the blog submission
-window.submitBlog = () => {
+window.submitBlog = async () => {
     // Check if user is logged in
     if (!user || !user.username) {
         alert("You must be logged in to write a blog.");
@@ -94,69 +92,24 @@ window.submitBlog = () => {
         title: title.value,
         category: category.value,
         content: content.value,
+        image: image.value,
         date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
         userName: user.username,
     }
 
-    // console.log(blog);
-    // console.log(user);
-    uploadFile()
-        .then(async (url) => {
-            blog.image = url
-            const reference = collection(db, 'blogs');
-            const res = await addDoc(reference, blog)
-            console.log(res);
-            showNotification("Your blog has been uploaded!");
-        })
-        .catch((e) => {
-            alert(e.message)
-        })
+    try {
+        const reference = collection(db, 'blogs');
+        const res = await addDoc(reference, blog)
+        console.log(res);
+        showNotification("Your blog has been uploaded!");
+    } catch (e) {
+        alert(e.message)
+    }
 
     title.value = ''
     content.value = ''
     category.value = ''
-    file_upload.value = ''
-}
-
-// Function to upload images on firebase storage
-window.uploadFile = () => {
-    return new Promise((resolve, reject) => {
-        let files = file_upload.files[0]
-        console.log(files)
-        const randomNum = Math.random().toString().slice(2);
-
-        const storageRef = ref(storage, `images/${randomNum}`)
-        var uploadTask = uploadBytesResumable(storageRef, files)
-
-        uploadTask.on('state_changed',
-            (snapshot) => {
-                // Observe state change events such as progress, pause, and resume
-                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                console.log('Upload is ' + progress + '% done');
-                switch (snapshot.state) {
-                    case 'paused': // or 'paused'
-                        console.log('Upload is paused');
-                        break;
-                    case 'running': // or 'running'
-                        console.log('Upload is running');
-                        break;
-                }
-            },
-            (error) => {
-                // Handle unsuccessful uploads
-                alert(error.message)
-                reject(error)
-            },
-            () => {
-                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log('Files is available at', downloadURL);
-                    resolve(downloadURL)
-                })
-            }
-        );
-    });
-
+    image.value = ''
 }
 
 // Function to toggle hamburger
