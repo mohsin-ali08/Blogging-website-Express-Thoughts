@@ -35,7 +35,7 @@ const getBlogs = async () => {
             ...item.data(),
         }
         // Filter blogs by the logged-in user
-        if (obj.userName === user.username) {
+        if (user && obj.userName === user.username) {
             allBlogs.push(obj);
         }
     })
@@ -85,7 +85,7 @@ window.submitBlog = () => {
         return;
     }
 
-    if (!title.value && category.value && content.value){
+    if (!title.value || !category.value || !content.value){
         alert("Please fill the details")
         return
     }
@@ -114,8 +114,8 @@ window.submitBlog = () => {
 
     title.value = ''
     content.value = ''
-    category.innerHTML = ''
-    file_upload.innerHTML = ''
+    category.value = ''
+    file_upload.value = ''
 }
 
 // Function to upload images on firebase storage

@@ -87,12 +87,12 @@ const renderBlogs = () => {
         // console.log(obj.id); 
         
         blogList.innerHTML += `<div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border-b border-gray-300 rounded  overflow-hidden">
-                <img src="${obj.image}" alt="${obj.title, obj.catogory}" class="w-full h-48 object-cover">
+                <img src="${obj.image}" alt="${obj.title}" class="w-full h-48 object-cover">
                 <div class="p-6">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-xl mb-2 border-b text-white">${obj.title}</h3>
                         </div>
-                        <p class="text-gray-200 mb-4 border-b ">${obj.content.substring(0,70)}..</p>
+                        <p class="text-gray-200 mb-4 border-b ">${(obj.content || "").substring(0,70)}..</p>
                         <a href="./pages/Blogs/BlogPage/page.html" onclick="getId('${obj.id}')" class="text-white hover:text-black text-sm">Read More</a>
                         <p class="text-blue-500" > Author : <span class="text-sm font-semibold text-white border-b">${obj.userName.toUpperCase()}</span></p>
                         </div>
